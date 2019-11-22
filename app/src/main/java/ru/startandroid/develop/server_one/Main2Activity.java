@@ -59,8 +59,7 @@ public class Main2Activity extends AppCompatActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter(Main2Activity.this, android.R.layout.simple_list_item_1,array);
                 lvMain2.setAdapter(adapter);
 
-               //ArrayList<String> myList=new ArrayList<String>(  );
-                //myList.add( data );
+              
 
             }
 
