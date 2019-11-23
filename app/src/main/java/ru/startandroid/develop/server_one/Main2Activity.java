@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
@@ -66,11 +67,12 @@ public class Main2Activity extends AppCompatActivity {
                   String phone  = ds.child("phone").getValue(String.class);
 
 
-                    Log.d("TAG", phone+"  "+data+"  "+"Рейс номер"+flight);
+                    Log.d("TAG", data+"  "+"Рейс номер"+flight+"  "+phone);
                     //edit_text.setText(phone+"  "+data+"  "+"Рейс номер"+flight);
 
 
-                    basa.add( phone+"  "+data+"  "+"Рейс номер"+flight );
+                    basa.add( data+"  "+"Рейс номер"+flight+"  "+phone );
+                    Collections.sort(basa);
                     ad.notifyDataSetChanged();
 
 
