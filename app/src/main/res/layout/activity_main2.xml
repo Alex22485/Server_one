@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Main2Activity">
 
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_marginRight="53dp"
         android:layout_marginBottom="672dp"
         android:text="Переход в на другой лист"
-        android:onClick="next_list"/>
+        android:onClick="next_list2"/>
 
 
     <ListView

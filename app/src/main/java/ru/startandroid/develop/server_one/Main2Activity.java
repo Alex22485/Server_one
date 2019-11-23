@@ -3,8 +3,10 @@ package ru.startandroid.develop.server_one;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -16,11 +18,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
-    String[] array={};
+    //Добавлено
+    ListView lv2;
+    List<String> basa=new ArrayList<String>(  );
+    ArrayAdapter ad;
+
+    String[] array={"Alex","Jon","Kate"};
+
 
 
     @Override
@@ -28,10 +37,16 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        //Добавил
+        lv2=findViewById( R.id.lv2 );
+        basa=new ArrayList<String>( Arrays.asList( array ) );
+        ad= new ArrayAdapter<>( this,android.R.layout.simple_list_item_1,basa );
+        lv2.setAdapter( ad );
 
 
 
-         final ListView lvMain2 = ( ListView ) findViewById( R.id.lv2 );
+
+       //  final ListView lvMain2 = ( ListView ) findViewById( R.id.lv2 );
 
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -55,11 +70,16 @@ public class Main2Activity extends AppCompatActivity {
                     //edit_text.setText(phone+"  "+data+"  "+"Рейс номер"+flight);
 
 
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter(Main2Activity.this, android.R.layout.simple_list_item_1,array);
-                lvMain2.setAdapter(adapter);
+                    basa.add( phone+"  "+data+"  "+"Рейс номер"+flight );
+                    ad.notifyDataSetChanged();
 
-              
+
+
+                }
+               // ArrayAdapter<String> adapter = new ArrayAdapter(Main2Activity.this, android.R.layout.simple_list_item_1,array);
+                //lvMain2.setAdapter(adapter);
+
+
 
             }
 
@@ -70,6 +90,16 @@ public class Main2Activity extends AppCompatActivity {
         };
         usersdRef.addListenerForSingleValueEvent(valueEventListener);
     }
+
+    public void next_list2(View view){
+        Intent n = new Intent(this,Main3Activity.class);
+        startActivity(n);
+
+
+
+    }
+
+
 
 
 
