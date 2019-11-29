@@ -2,6 +2,7 @@ package ru.startandroid.develop.server_one;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -52,6 +53,12 @@ public class Main3Activity extends AppCompatActivity {
             }
         } );
 
+
+    }
+
+    public void NextList(View view){
+        Intent m=  new Intent(this,Main5Activity.class);
+        startActivity( m );
 
     }
 }

@@ -1,9 +1,11 @@
 package ru.startandroid.develop.server_one;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +35,7 @@ public class Main2Activity extends AppCompatActivity {
     ListView lv2;
     List<String> basa=new ArrayList<String>(  );
     ArrayAdapter ad;
-    TextView txt;
+    EditText Calend;
 
 
     // ADD Calendar
@@ -45,6 +47,11 @@ public class Main2Activity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
 
     String[] array={};
+
+    // Вставляем данные маршрута и номера рейса
+    EditText pushMap,pushflight;
+    String[] listItems1 = {"Маршрут 1","Маршрут 2","Маршрут 3","Маршрут 4"};
+    String[] listItems2 = {"Рейс номер 1","Рейс номер 2","Рейс номер 3","Рейс номер 4"};
 
 
 
@@ -58,15 +65,18 @@ public class Main2Activity extends AppCompatActivity {
         basa=new ArrayList<String>( Arrays.asList( array ) );
         ad= new ArrayAdapter<>( this,android.R.layout.simple_list_item_1,basa );
         lv2.setAdapter( ad );
-        txt=findViewById(R.id.txt);
+        Calend=findViewById(R.id.Calend);
 
 
         choisData=findViewById(R.id.choisData);
-        txt=findViewById(R.id.txt);
 
 
+// Вставляем данные маршрута и номера рейса
+        pushMap=findViewById( R.id.pushMap );
+        pushflight=findViewById( R.id.pushflight );
 
 
+// Календарь
         choisData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +88,7 @@ public class Main2Activity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                txt.setText(day + " " + (month + 1) + " " + year);
+                                Calend.setText(day + " " + (month + 1) + " " + year);
                             }
                         }, year,month,dayOfmonth);
                 datePickerDialog.show();
@@ -117,14 +127,57 @@ public class Main2Activity extends AppCompatActivity {
         //usersdRef.addListenerForSingleValueEvent(valueEventListener);
     }
 
+
+// переход на другой лист
     public void next_list2(View view){
         Intent n = new Intent(this,Main3Activity.class);
         startActivity(n);
     }
 
+
+    // Вставляем данные номера Маршрута и Номер рейса
+    public void showDialog_6 (View view){
+
+        AlertDialog.Builder builder=new AlertDialog.Builder( Main2Activity.this );
+        builder.setTitle( "Выбирите Маршрут");
+        builder.setCancelable( false );
+        builder.setItems( listItems1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+
+                pushMap.setText(listItems1[which]);
+
+            }
+        } );
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void showDialog_7 (View view){
+
+        AlertDialog.Builder builder=new AlertDialog.Builder( Main2Activity.this );
+        builder.setTitle( "Выбирите Номер рейса");
+        builder.setCancelable( false );
+        builder.setItems( listItems2, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+
+                pushflight.setText(listItems2[which]);
+
+            }
+        } );
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+
+// извлечение из базы данных
     public void btnInsert (View view){
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Заявки").child("Дата").child("В Красноярск");
-        DatabaseReference usersdRef = rootRef.child( txt.getText().toString() );
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Заявки")
+                .child("В Красноярск")
+                .child( Calend.getText().toString() )
+                .child( pushMap.getText().toString() );
+        DatabaseReference usersdRef = rootRef.child( pushflight.getText().toString() );
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
