@@ -1,6 +1,5 @@
 package ru.startandroid.develop.server_one;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,12 +7,13 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,7 +39,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
     // ADD Calendar
-    Button choisData;
+    Button choisData,choisMap,choisFlight,btnInsert;
     int year;
     int month;
     int dayOfmonth;
@@ -69,6 +69,9 @@ public class Main2Activity extends AppCompatActivity {
 
 
         choisData=findViewById(R.id.choisData);
+        choisMap=findViewById(R.id.choisMap);
+        choisFlight=findViewById(R.id.choisFlight);
+        btnInsert=findViewById( R.id.btnInsert );
 
 
 // Вставляем данные маршрута и номера рейса
@@ -125,7 +128,30 @@ public class Main2Activity extends AppCompatActivity {
       //      }
     //    };
         //usersdRef.addListenerForSingleValueEvent(valueEventListener);
+
+        Calend.addTextChangedListener( loginTextWather );
+        pushMap.addTextChangedListener( loginTextWather );
+        pushflight.addTextChangedListener( loginTextWather );
+
     }
+    // Disable Button it Text is Empty
+    private TextWatcher loginTextWather= new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            String choisDataInput = Calend.getText().toString().trim();
+            String choisMapInput = pushMap.getText().toString().trim();
+            String choisFlightInput = pushflight.getText().toString().trim();
+
+            btnInsert.setEnabled(!choisDataInput.isEmpty()&& !choisMapInput.isEmpty()&& !choisFlightInput.isEmpty());
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    };
 
 
 // переход на другой лист
@@ -189,7 +215,7 @@ public class Main2Activity extends AppCompatActivity {
                     String phone  = ds.child("phone").getValue(String.class);
 
                     Log.d("TAG", data+"  "+"Рейс номер"+""+flight+"  "+phone);
-                    basa.add(flight+"  "+"Рейс"+"  "+"Телефон"+"  "+phone+"  "+data );
+                    basa.add("Рейс №"+flight+"  "+"Дата"+"  "+data+"  "+phone );
                     Collections.sort(basa);
                     ad.notifyDataSetChanged();
                 }
