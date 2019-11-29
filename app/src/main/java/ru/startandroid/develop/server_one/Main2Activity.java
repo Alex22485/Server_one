@@ -35,7 +35,7 @@ public class Main2Activity extends AppCompatActivity {
     ListView lv2;
     List<String> basa=new ArrayList<String>(  );
     ArrayAdapter ad;
-    EditText Calend;
+    TextView Calend;
 
 
     // ADD Calendar
@@ -49,7 +49,7 @@ public class Main2Activity extends AppCompatActivity {
     String[] array={};
 
     // Вставляем данные маршрута и номера рейса
-    EditText pushMap,pushflight;
+    TextView pushMap,pushflight;
     String[] listItems1 = {"Маршрут 1","Маршрут 2","Маршрут 3","Маршрут 4"};
     String[] listItems2 = {"Рейс номер 1","Рейс номер 2","Рейс номер 3","Рейс номер 4"};
 
