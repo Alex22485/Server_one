@@ -133,6 +133,8 @@ public class Main2Activity extends AppCompatActivity {
         pushMap.addTextChangedListener( loginTextWather );
         pushflight.addTextChangedListener( loginTextWather );
 
+
+
     }
     // Disable Button it Text is Empty
     private TextWatcher loginTextWather= new TextWatcher() {
@@ -161,7 +163,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-    // Вставляем данные номера Маршрута и Номер рейса
+    // AlertDialog Вставляем данные номера Маршрута и Номер рейса
     public void showDialog_6 (View view){
 
         AlertDialog.Builder builder=new AlertDialog.Builder( Main2Activity.this );
@@ -199,8 +201,9 @@ public class Main2Activity extends AppCompatActivity {
 
 // извлечение из базы данных
     public void btnInsert (View view){
+       // DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Заявки")
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Заявки")
-                .child("В Красноярск")
+                .child("Аэропорт-Красноярск")
                 .child( Calend.getText().toString() )
                 .child( pushMap.getText().toString() );
         DatabaseReference usersdRef = rootRef.child( pushflight.getText().toString() );
@@ -225,6 +228,32 @@ public class Main2Activity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         };usersdRef.addListenerForSingleValueEvent(valueEventListener);
+
+
+
+       /* DatabaseReference rootRef2 = FirebaseDatabase.getInstance().getReference("Пользователи");
+        DatabaseReference usersdRef2 = rootRef2.child( "+79832977376" );
+        ValueEventListener valueEventListener2 = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    String data = ds.child("дата").getValue(String.class);
+                    String flight = ds.child("рейс").getValue(String.class);
+                    String phone  = ds.child("phone").getValue(String.class);
+
+                    Log.d("TAG", data+"  "+"Рейс номер"+""+flight+"  "+phone);
+                    basa.add("Рейс №"+flight+"  "+"Дата"+"  "+data+"  "+phone );
+                    Collections.sort(basa);
+                    ad.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };usersdRef2.addListenerForSingleValueEvent(valueEventListener2);*/
 
 
     }
