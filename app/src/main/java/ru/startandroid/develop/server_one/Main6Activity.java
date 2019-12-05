@@ -58,6 +58,13 @@ public class Main6Activity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void btn7(View view){
+        Intent intent = new Intent( this,Main7Activity.class );
+        startActivity( intent );
+
+    }
+
+
 
 
 

@@ -158,7 +158,7 @@ public class Main2Activity extends AppCompatActivity {
 
 // переход на другой лист
     public void next_list2(View view){
-        Intent n = new Intent(this,Main3Activity.class);
+        Intent n = new Intent(this,Main7Activity.class);
         startActivity(n);
     }
 
