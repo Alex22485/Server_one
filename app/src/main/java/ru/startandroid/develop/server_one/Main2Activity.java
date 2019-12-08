@@ -51,7 +51,7 @@ public class Main2Activity extends AppCompatActivity {
     // Вставляем данные маршрута и номера рейса
     TextView pushMap,pushflight;
     String[] listItems1 = {"Маршрут 1","Маршрут 2","Маршрут 3","Маршрут 4"};
-    String[] listItems2 = {"Рейс номер 1","Рейс номер 2","Рейс номер 3","Рейс номер 4"};
+    String[] listItems2 = {"1","2","3","4"};
 
 
 
@@ -136,7 +136,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
     }
-    // Disable Button it Text is Empty
+    // Disable Button if Text is Empty
     private TextWatcher loginTextWather= new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
